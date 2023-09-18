@@ -44,22 +44,13 @@ def queryResolver(name):
 delayMax = int(cfgInit('config.ini')[1])
 defaultDecision = str(cfgInit('config.ini')[2])
 def WebInit():
-        #query_ln = '"' + clean_name + '" '+ 'site:"linkedin.com"'
-    #query_tw = '"' + clean_name + '" ' +   'site:"twitter.com"'
-    #query_yt = '"' + clean_name + '" ' + 'site:"youtube.com"'
 
-    #proxy = "socks5://192.168.1.199:9050"
+    #Webdriver init with some anti anti-bot measures
     chrome_options = webdriver.ChromeOptions()
-    #chrome_options.add_argument("--headless")
     chrome_options.add_argument('log-level=3')
-    #chrome_options.add_argument('--proxy-server='+proxy)
-    # Adding argument to disable the AutomationControlled flag 
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled") 
-    
-    # Exclude the collection of enable-automation switches 
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"]) 
     chrome_options.add_argument("start-maximized")
-    # Turn-off userAutomationExtension 
     chrome_options.add_experimental_option("useAutomationExtension", False) 
     chrome_options.headless = True
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
@@ -67,7 +58,6 @@ def WebInit():
 
 
 
-    #driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()
 
     driver.get("http://www.google.com/search?q=test")
     cookies = pickle.load(open("cookies.pkl", "rb"))
@@ -115,7 +105,7 @@ def Search(queries, driver):
         sleep(0.6)
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
-        # soup = BeautifulSoup(r.text, 'html.parser')
+
             
         search = soup.find_all('div', class_="yuRUbf")
         for h in search:
