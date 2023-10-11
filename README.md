@@ -6,6 +6,12 @@ To use hunter, input your queries (dorks) into mod variable (twitter, linkedin, 
 Then run hunter.py and input your search target full name.
 Hunter will now print out results for your search in a list.
 
+# Config
+mod - Queries to be searched
+DefaultDelayMax - Max delay in randomized default delay
+DefaultDecision - Default decision for automatic link preview. (Empty field for manual choice during execution)
+LinkMax - Amount of links to be opened in browser (if user agrees)
+
 # Required modules
 - time
 - pickle
